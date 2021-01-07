@@ -1,20 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'style.css' %}">
     <title>Blog App</title>
 </head>
 <body>
-
     <main>
     {% block main %}
     {% endblock main %}
     </main>
+    <section>
+        <ul>
+            {% for post in object_list %}
+             
+            <li> <a href="{% url 'blog_details' post.pk %}"></a>{{ post.title }}</li>
+                <a href="{% url 'blog_delete' post.pk %}">Delete</a>
+                <a href="{% url 'blog_update' post.pk %}">Update</a>
+                <a href="{% url 'blog_details' post.pk %}">Details</a>
+              
+            {% endfor %}
+          </ul>
+    </section>
     <br>
     <br>
     <button><a href="{% url 'home' %}" class="first">HOME</a></button>
+    <li><a href="{% url 'blog_create' %}">Add Post</a></li>
 </body>
 </html>
